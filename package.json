@@ -1,0 +1,22 @@
+{
+  "name": "soft_bun_html",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "./node_modules/typescript/bin/tsc src/script.ts --outDir ./dist",
+    "start": "npx webpack --config webpack.config.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "ts-loader": "^9.4.4",
+    "tsc": "^2.0.4",
+    "typescript": "^5.1.6",
+    "webpack": "^5.88.1",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "soft_bun": "^1.7.2"
+  }
+}

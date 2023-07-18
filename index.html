@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soft Bun Example</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/styles/darcula.min.css">
+    <style>
+      .hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  background: #282a36;
+}
+
+.hljs-built_in,
+.hljs-selector-tag,
+.hljs-section,
+.hljs-link {
+  color: #8be9fd;
+}
+
+.hljs-keyword {
+  color: #ff79c6;
+}
+
+.hljs,
+.hljs-subst {
+  color: #f8f8f2;
+}
+
+.hljs-title,
+.hljs-attr,
+.hljs-meta-keyword {
+  font-style: italic;
+  color: #50fa7b;
+}
+
+.hljs-string,
+.hljs-meta,
+.hljs-name,
+.hljs-type,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition,
+.hljs-variable,
+.hljs-template-tag,
+.hljs-template-variable {
+  color: #f1fa8c;
+}
+
+.hljs-comment,
+.hljs-quote,
+.hljs-deletion {
+  color: #6272a4;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-literal,
+.hljs-title,
+.hljs-section,
+.hljs-doctag,
+.hljs-type,
+.hljs-name,
+.hljs-strong {
+  font-weight: bold;
+}
+
+.hljs-literal,
+.hljs-number {
+  color: #bd93f9;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+    </style>
+
+  </head>
+
+  <body class="bg-gray-100 min-h-screen flex flex-col justify-center items-center">
+    <h1 class="text-3xl font-bold underline mb-8 text-indigo-700">
+      Soft Bun Playground
+    </h1>
+    <div class="mb-4">
+      <button id="changeStateButton" class="bg-indigo-500 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded">
+        Increase state "count"
+      </button>
+    </div>
+    <strong class="text-lg text-gray-700 mb-2">b = count * 2</strong>
+    <div id="stateChanges" class="bg-white rounded shadow p-4 max-w-md w-full text-center"></div>
+
+    <pre class="max-w-xs md:max-w-2xl h-80 p-4">
+      <code id="codeSnippet" class="language-javascript h-full"></code>
+    </pre>
+
+    <script type="module" src="dist/script.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.4.0/highlight.min.js"></script>
+    <script>
+      const codeSnippet = document.getElementById("codeSnippet");
+      function loadCodeSnippet() {
+        document.addEventListener("DOMContentLoaded", function() {
+          const codeContent = `// Define your initial state
+const initialState = {
+  count: 0,
+  b: 0,
+};
+
+// Create a StateManager instance
+const stateManager = new StateManager(initialState);
+
+// Add a reactive dependency
+stateManager.reactive('b', '$count * 2');
+
+// Function to display state changes
+function displayStateChange(newState) {
+  const stateChangesElement = document.getElementById('stateChanges');
+  stateChangesElement.textContent = JSON.stringify(newState);
+}
+
+// Attach subscriber to state updates
+stateManager.subscribe(displayStateChange);
+
+// Get the button element
+const changeStateButton = document.getElementById('changeStateButton');
+
+// Add event listener to the button
+changeStateButton?.addEventListener('click', () => {
+  const currentState = stateManager.getState();
+  const nextState = { ...currentState, count: currentState.count + 1 };
+  stateManager.setState(nextState);
+});
+
+// Display initial state
+displayStateChange(stateManager.getState());
+`;
+
+          codeSnippet.innerHTML = codeContent;
+          hljs.highlightBlock(codeSnippet);
+        });
+      }
+      loadCodeSnippet();
+
+    </script>
+  </body>
+
+</html>
