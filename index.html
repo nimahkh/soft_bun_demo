@@ -86,12 +86,22 @@
       Soft Bun Playground
     </h1>
     <div class="mb-4">
+      <button id="changeLargeStateButton" class="bg-indigo-500 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded">
+        Large data mutation
+      </button>
+    </div>
+
+    <div id="largeDataStateChanges" class="bg-white rounded shadow p-4 w-max w-full text-center"></div>
+
+  <div class="border-b m-4 border-gray-300 w-full h-1"></div>
+
+    <div class="mb-4">
       <button id="changeStateButton" class="bg-indigo-500 hover:bg-indigo-700 text-white font-semibold py-2 px-4 rounded">
         Increase state "count"
       </button>
     </div>
     <strong class="text-lg text-gray-700 mb-2">b = count * 2</strong>
-    <div id="stateChanges" class="bg-white rounded shadow p-4 max-w-md w-full text-center"></div>
+    <div id="stateChanges" class="bg-white rounded shadow p-4 w-max w-full text-center"></div>
 
     <pre class="max-w-xs md:max-w-2xl h-80 p-4">
       <code id="codeSnippet" class="language-javascript h-full"></code>
